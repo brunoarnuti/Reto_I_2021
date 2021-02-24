@@ -1,5 +1,7 @@
 from django.db import models
 
+from bioinformatica.models import experiment
+
 
 class DynamicAttribute(models.Model):
 
@@ -15,4 +17,5 @@ class DynamicAttribute(models.Model):
     attribute_id = models.CharField(max_length=120)
     attribute_type = models.CharField(max_length=5, choices=ATTRIBUTE_TYPES_CHOICES, default=TYPE1)
     attribute_value = models.CharField(max_length=200)
+    experiment_attributes = models.ForeignKey('experiment', on_delete=models.CASCADE, blank=True, null=True)
 
