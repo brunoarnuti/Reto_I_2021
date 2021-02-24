@@ -21,6 +21,14 @@ class CustomUser(AbstractUser):
     """
     CI = models.CharField(max_length=8, blank=False, null=False, validators=[civalidatator])
 
+    is_staff = models.BooleanField(
+        _('staff status'),
+        default=True,
+        help_text=_('Designates whether the user can log into this admin site.'),
+    )
+
+
+
 
 
 
