@@ -11,4 +11,4 @@ class Sample(models.Model):
     deleted = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.experiment.name
+        return self.name
