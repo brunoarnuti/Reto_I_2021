@@ -2,7 +2,9 @@
 
 # Orquestación de servicios para una solución de Bioinformática
 
-##Para levantar la pagina:
+
+
+# Para levantar la pagina:
 
 1) Clonar el main
 2) pyhton manage.py makemigrations
