@@ -7,7 +7,7 @@
 # Para levantar la pagina:
 
 1) Clonar el main
-2) pyhton manage.py makemigrations
-3) python manage.py migrate
-4) python manage.py createsuperuser
-5) python manage.py runserver
+2) py manage.py makemigrations
+3) py manage.py migrate
+4) py manage.py createsuperuser
+5) py manage.py runserver
