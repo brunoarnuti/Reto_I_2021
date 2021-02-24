@@ -11,12 +11,14 @@ class AttributeInline(admin.TabularInline):
 
 class ExperimentAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None,                    {'fields': ['name']}),
-        ('Date information',      {'fields': ['date']})
+        (None, {'fields': ['name']}),
+        ('Date information', {'fields': ['date']}),
+        ('Project id', {'fields': ['project_id']})
     ]
-    list_display = ('name','date','place','state')
+    list_display = ('name','date','place','state','project_id')
     list_filter = ['date']
     search_fields = ['name']
     inlines = [AttributeInline]
 
 admin.site.register(Experiment,ExperimentAdmin)
+
