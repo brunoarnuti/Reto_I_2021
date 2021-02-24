@@ -1,4 +1,4 @@
 from django.contrib import admin
-from bioinformatica.models.project import Sample
+from bioinformatica.models.sample import Sample
 
 admin.site.register(Sample)
