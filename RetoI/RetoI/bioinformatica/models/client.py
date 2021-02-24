@@ -12,7 +12,7 @@ class Client(models.Model):
     direction = models.CharField(_('Direction'), max_length=200)
     email = models.CharField('E-mail', max_length=200, blank=True)
     phone = models.CharField(_('Phone'), max_length=200)
-    project_ids = models.ManyToManyField(Project, null=True, blank=True)
+    project_ids = models.ManyToManyField(Project, blank=True)
     contact_ids = models.ForeignKey('self', on_delete=models.DO_NOTHING, null=True, blank=True)
 
     def __str__(self):
