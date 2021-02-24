@@ -9,7 +9,7 @@ class Project(models.Model):
     create_date = models.DateTimeField(_('Create date'), default=datetime.now())
     description = models.TextField(_('Description'))
     contact_id = models.ForeignKey('Client', on_delete=models.DO_NOTHING)
-    #experiment_ids = models.ForeignKey('Experiments', on_delete=models.DO_NOTHING)
+    #experiment_ids = models.ForeignKey('Experiments', on_delete=models.DO_NOTHING, blank=True)
 
     def __str__(self):
         return self.name
