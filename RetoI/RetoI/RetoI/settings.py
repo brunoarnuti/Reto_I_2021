@@ -28,10 +28,14 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+AUTH_USER_MODEL = 'CustomUsers.CustomUser'
+
+
 # Application definition
 
 INSTALLED_APPS = [
     'bioinformatica.apps.BioinformaticaConfig',
+    'CustomUsers.apps.CustomusersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
