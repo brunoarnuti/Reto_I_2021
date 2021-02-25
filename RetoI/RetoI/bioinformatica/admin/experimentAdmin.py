@@ -20,5 +20,8 @@ class ExperimentAdmin(admin.ModelAdmin):
     search_fields = ['name']
     inlines = [AttributeInline]
 
+class experimentAdmin(admin.ModelAdmin):
+    exclude = ['deleted', ]
+
 admin.site.register(Experiment,ExperimentAdmin)
 
