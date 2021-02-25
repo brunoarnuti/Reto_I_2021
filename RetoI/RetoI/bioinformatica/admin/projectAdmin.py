@@ -6,6 +6,8 @@ class ProjectAdmin(admin.ModelAdmin):
     list_filter = ['name','contact','create_date']
     search_fields = ['name','contact']
 
+
+
 admin.site.register(Project,ProjectAdmin)
 
 
