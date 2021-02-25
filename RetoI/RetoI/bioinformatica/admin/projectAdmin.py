@@ -9,13 +9,5 @@ class ProjectAdmin(LogicalDeletedModelAdmin):
     search_fields = ['name','contact__name', 'contact__surname',]
 
 
-
 admin.site.register(Project,ProjectAdmin)
-
-
-
-
-
-
-
 
