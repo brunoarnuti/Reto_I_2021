@@ -4,9 +4,7 @@ from bioinformatica.models.project import Project
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ('name','contact','create_date')
     list_filter = ['name','contact','create_date']
-    search_fields = ['name','contact']
-
-
+    search_fields = ['name']
 
 admin.site.register(Project,ProjectAdmin)
 
