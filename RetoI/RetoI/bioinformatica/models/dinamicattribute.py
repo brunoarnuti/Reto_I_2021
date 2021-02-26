@@ -1,4 +1,3 @@
-import self as self
 from django.db import models
 from bioinformatica.models.experiment import Experiment
 
