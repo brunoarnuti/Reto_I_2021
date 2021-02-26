@@ -1,5 +1,4 @@
 from django.db import models
-
 from bioinformatica.models import experiment
 
 
