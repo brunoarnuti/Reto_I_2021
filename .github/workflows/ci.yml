@@ -34,7 +34,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Run Tests
       run: |
-        python manage.py test
+        python Reto_I_2021/RetoI/RetoI/manage.py test
     - name: Build the docker-compose stack
       run: docker-compose up -d
       
