@@ -4,7 +4,7 @@ from bioinformatica.models.experiment import Experiment
 
 class DynamicAttributeDefinition(models.Model):
 
-    attribute_description = models.CharField(max_length=120, default="")
+    attribute_description = models.TextField(max_length=120, blank=True)
     attribute_name = models.CharField(max_length=120)
 
     def __str__(self):
