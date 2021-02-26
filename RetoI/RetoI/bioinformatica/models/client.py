@@ -1,10 +1,11 @@
 from django.db import models
 from django.utils.translation import gettext as _
+from .logicaldelete import LogicalDeletedModel
 
 from .project import Project
 
 
-class Client(models.Model):
+class Client(LogicalDeletedModel):
 
     name = models.CharField(_('Name'), max_length=200)
     surname = models.CharField(_('Surname'), max_length=200)
