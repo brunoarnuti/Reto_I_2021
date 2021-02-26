@@ -13,9 +13,10 @@ class ExperimentAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['name']}),
         ('Date information', {'fields': ['date']}),
-        ('Project id', {'fields': ['project_id']})
+        ('Project id', {'fields': ['project_id']}),
+        ('Location',   {'fields':['lcation']})
     ]
-    list_display = ('name','date','place','state','project_id')
+    list_display = ('name','date','location','state','project_id')
     list_filter = ['date']
     search_fields = ['name']
     inlines = [AttributeInline]
