@@ -2,7 +2,9 @@ from django.db import models
 from django.utils import timezone
 from .logicaldelete import LogicalDeletedModel
 
+
 class Experiment(LogicalDeletedModel):
+
     name = models.CharField(max_length=120)
     date = models.DateTimeField('date published', default=timezone.now)
     place = models.CharField(max_length=200)
