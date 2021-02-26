@@ -3,5 +3,7 @@ from bioinformatica.models.sample import Sample
 
 
 class SampleAdmin(admin.ModelAdmin):
-    exclude = ['deleted',]
+    exclude = ['deleted', ]
+
+
 admin.site.register(Sample, SampleAdmin)

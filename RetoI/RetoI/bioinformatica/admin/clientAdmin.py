@@ -1,4 +1,10 @@
 from django.contrib import admin
 from bioinformatica.models.client import Client
+from bioinformatica.models.logicaldelete import LogicalDeletedModelAdmin
 
-admin.site.register(Client)
+
+class clientAdmin(LogicalDeletedModelAdmin):
+    exclude = ['deleted', ]
+
+
+admin.site.register(Client,clientAdmin)

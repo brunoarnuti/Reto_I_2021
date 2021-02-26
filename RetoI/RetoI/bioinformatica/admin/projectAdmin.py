@@ -25,5 +25,8 @@ class ProjectAdmin(LogicalDeletedModelAdmin):
         ('Project information', {'fields': ['create_date','description','projects'],'classes':['collapse']}),
     ]
 
+class projectAdmin(admin.ModelAdmin):
+    exclude = ['deleted', ]
+
 admin.site.register(Project,ProjectAdmin)
 

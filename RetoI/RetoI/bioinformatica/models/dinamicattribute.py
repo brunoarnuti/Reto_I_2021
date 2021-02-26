@@ -1,21 +1,30 @@
 from django.db import models
+from bioinformatica.models.experiment import Experiment
 
-from bioinformatica.models import experiment
+
+class DynamicAttributeDefinition(models.Model):
+
+    attribute_description = models.CharField(max_length=120, default="")
+    attribute_name = models.CharField(max_length=120)
+
+    def __str__(self):
+        return self.attribute_name
 
 
-class DynamicAttribute(models.Model):
+class DynamicAttributeInstance(models.Model):
 
-    TYPE1 = 'T1'
-    TYPE2 = 'T2'
-    TYPE3 = 'T3'
+    attribute_value = models.CharField(max_length=120)
+    experiment_attributes = models.ForeignKey('Experiment', on_delete=models.CASCADE, blank=True, null=True)
 
-    ATTRIBUTE_TYPES_CHOICES = [
-        ('TYPE1', 'Type 1'),
-        ('TYPE2', 'Type 2'),
-        ('TYPE3', 'Type 3'),
-    ]
-    attribute_id = models.CharField(max_length=120)
-    attribute_type = models.CharField(max_length=5, choices=ATTRIBUTE_TYPES_CHOICES, default=TYPE1)
-    attribute_value = models.CharField(max_length=200)
-    experiment_attributes = models.ForeignKey('experiment', on_delete=models.CASCADE, blank=True, null=True)
+    attribute_type = models.OneToOneField(
+        DynamicAttributeDefinition,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        default=None
+    )
 
+    def __str__(self):
+        return str(self.attribute_type)
+
+
+    #attributes = models.CharField(max_length=5, choices=at, default=None)
