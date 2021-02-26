@@ -5,9 +5,12 @@ from bioinformatica.models.experiment import Experiment
 
 # Register your models here.
 
+
 class AttributeInline(admin.TabularInline):
     model = DynamicAttributeInstance
     extra = 1
+    fields = ['attribute_type', 'attribute_value',]
+
 
 class ExperimentAdmin(admin.ModelAdmin):
     fieldsets = [

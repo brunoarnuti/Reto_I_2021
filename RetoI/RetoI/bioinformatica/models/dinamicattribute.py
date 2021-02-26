@@ -24,6 +24,8 @@ class DynamicAttributeInstance(models.Model):
         default=None
     )
 
+    def __str__(self):
+        return str(self.attribute_type)
 
 
     #attributes = models.CharField(max_length=5, choices=at, default=None)
