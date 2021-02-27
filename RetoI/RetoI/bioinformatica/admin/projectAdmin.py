@@ -17,6 +17,7 @@ class AttributeInlineProject(LogicaLDeletedModelTabularInLine):
 
 
 class ProjectAdmin(LogicalDeletedModelAdmin):
+
     list_display = ('name', 'contact', 'create_date')
 
     list_filter = ['name', 'contact', 'create_date']
@@ -25,11 +26,11 @@ class ProjectAdmin(LogicalDeletedModelAdmin):
 
     inlines = [AttributeInlineExperiment, AttributeInlineProject]
 
+
     fieldsets = [
         (None, {'fields': [('name','contact')]}),
         ('Project information', {'fields': ['create_date','description','projects'],'classes':['collapse']}),
     ]
-
 
 class projectAdmin(LogicalDeletedModelAdmin):
     pass
