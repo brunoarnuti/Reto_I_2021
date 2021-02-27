@@ -1,8 +1,12 @@
 from django.db import models
 from bioinformatica.models.experiment import Experiment
+from .logicaldelete import LogicalDeletedModel
 
 
-class DynamicAttributeDefinition(models.Model):
+class DynamicAttributeDefinition(LogicalDeletedModel):
+    """
+           Clase que modela la definicion de Attributo, es decir, la que define el nombre del attributo, no el valor
+    """
 
     attribute_description = models.TextField(max_length=120, blank=True)
     attribute_name = models.CharField(max_length=120)
@@ -11,10 +15,16 @@ class DynamicAttributeDefinition(models.Model):
         return self.attribute_name
 
 
-class DynamicAttributeInstance(models.Model):
+class DynamicAttributeInstance(LogicalDeletedModel):
+
+    """
+            Clase que modela cada instancia especifica de Attributo, es decir, la que define el valor, y no el nombre del
+            attributo, para el tipo de atributo, es decir, para su nombre, esta clase tiene una relacion ManyToOne con
+            DynamicAttributeDefinition
+    """
 
     attribute_value = models.CharField(max_length=120)
-    experiment_attributes = models.ForeignKey('Experiment', on_delete=models.CASCADE, blank=True, null=True)
+    experiment_attributes = models.ForeignKey(Experiment, on_delete=models.CASCADE, blank=True, null=True)
 
     attribute_type = models.ForeignKey(
         DynamicAttributeDefinition,
@@ -27,4 +37,3 @@ class DynamicAttributeInstance(models.Model):
         return str(self.attribute_type)
 
 
-    #attributes = models.CharField(max_length=5, choices=at, default=None)

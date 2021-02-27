@@ -1,24 +1,28 @@
 from django.contrib import admin
 from bioinformatica.models.dinamicattribute import DynamicAttributeDefinition
 from bioinformatica.models.dinamicattribute import DynamicAttributeInstance
-# Register your models here.
+from bioinformatica.models.logicaldelete import LogicalDeletedModelAdmin, LogicaLDeletedModelTabularInLine
 
 
-class AttributeDefinitionInline(admin.TabularInline):
-    model = DynamicAttributeDefinition
+class AttributeInline(LogicaLDeletedModelTabularInLine):
+    model = DynamicAttributeInstance
     extra = 1
+    fields = ['attribute_type', 'attribute_value']
 
 
-class DynamicAttributeDefinitionAdmin(admin.ModelAdmin):
+class DynamicAttributeDefinitionAdmin(LogicalDeletedModelAdmin):
+
     fieldsets = [
         ('Name',                    {'fields': ['attribute_name']}),
         ('Description',             {'fields': ['attribute_description']}),
     ]
+
     list_display = ('attribute_name', 'attribute_description')
+
     search_fields = ['attribute_name']
 
 
-class DynamicAttributeAdmin(admin.ModelAdmin):
+class DynamicAttributeAdmin(LogicalDeletedModelAdmin):
 
     fieldsets = [
         (None, {'fields': ['attribute_type']}),
