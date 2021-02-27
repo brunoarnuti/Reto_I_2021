@@ -16,11 +16,11 @@ class DynamicAttributeInstance(models.Model):
     attribute_value = models.CharField(max_length=120)
     experiment_attributes = models.ForeignKey('Experiment', on_delete=models.CASCADE, blank=True, null=True)
 
-    attribute_type = models.OneToOneField(
+    attribute_type = models.ForeignKey(
         DynamicAttributeDefinition,
         on_delete=models.CASCADE,
-        primary_key=True,
-        default=None
+        default=None,
+        null=True
     )
 
     def __str__(self):
