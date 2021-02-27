@@ -132,3 +132,41 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Logging settings to send python logs to graylog
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": "debug.log",
+        },
+        "graypy": {
+            "level": "INFO",
+            "class": "graypy.GELFUDPHandler",
+            "host": "graylog", # this is the hostname of the container named graylog from docker-compose
+            "port": 12201, # UDP port we are using in Graylog
+        },
+    },
+    "root": {
+        "handlers": [
+            "graypy",
+            "console",
+            "file", # we can opt out from including logs in a file
+        ],
+        "level": "DEBUG",
+    },
+    "loggers": {
+        "django.request": {
+            "handlers": ["graypy"],
+            "level": "INFO",
+            "propagate": True,
+        },
+    },
+}

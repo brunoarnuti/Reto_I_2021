@@ -14,7 +14,7 @@ class ExperimentAdmin(admin.ModelAdmin):
         (None, {'fields': ['name']}),
         ('Date information', {'fields': ['date']}),
         ('Project id', {'fields': ['project_id']}),
-        ('Location',   {'fields':['lcation']})
+        ('Location',   {'fields':['location']})
     ]
     list_display = ('name','date','location','state','project_id')
     list_filter = ['date']
