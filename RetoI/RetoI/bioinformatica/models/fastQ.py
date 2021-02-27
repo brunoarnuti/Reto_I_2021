@@ -3,12 +3,10 @@ import os
 from django.core.files.storage import FileSystemStorage
 from django.db import models
 from .logicaldelete import LogicalDeletedModel
-
-# Create your models here.
 from RetoI.settings import UPLOAD_ROOT
 
-
 class FastQ(LogicalDeletedModel):
+
     sample = models.ForeignKey('Sample', on_delete=models.DO_NOTHING)
     date_created = models.DateTimeField('date created', auto_now_add=True, editable=True)
     name = models.CharField(max_length=240)
