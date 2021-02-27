@@ -2,8 +2,6 @@ from django.db import models
 from .logicaldelete import LogicalDeletedModel
 
 
-# Create your models here.
-
 class Sample(LogicalDeletedModel):
     experiment = models.ForeignKey('Experiment', on_delete=models.CASCADE)
     date_created = models.DateTimeField('date created', auto_now_add=True, editable=True)
@@ -12,3 +10,4 @@ class Sample(LogicalDeletedModel):
 
     def __str__(self):
         return self.experiment.name
+

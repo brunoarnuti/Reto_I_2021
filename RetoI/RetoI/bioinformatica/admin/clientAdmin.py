@@ -4,7 +4,7 @@ from bioinformatica.models.logicaldelete import LogicalDeletedModelAdmin
 
 
 class clientAdmin(LogicalDeletedModelAdmin):
-    exclude = ['deleted', ]
+    search_fields = ['name', 'surname']
 
 
-admin.site.register(Client,clientAdmin)
+admin.site.register(Client, clientAdmin)

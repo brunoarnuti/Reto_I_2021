@@ -1,7 +1,8 @@
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, AbstractUser
+from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext as _
+
 
 
 def civalidatator(value):
