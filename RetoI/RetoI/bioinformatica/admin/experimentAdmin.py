@@ -13,9 +13,8 @@ class ExperimentAdmin(LogicalDeletedModelAdmin):
     ]
 
     list_display = ('name', 'place', 'state', 'project_id',)
-
     inlines = [SamplesInline, AttributeInline]
-
+    list_filter = ['date']
     search_fields = ['name']
 
 
