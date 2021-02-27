@@ -14,7 +14,9 @@ class CustomUserAdmin(UserAdmin):
     """
 
     add_form = CustomUserCreationForm
+
     add_fieldsets = UserAdmin.add_fieldsets + ((None, {'fields': ('CI',)}),)
+
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         (_('Personal info'), {'fields': ('first_name', 'last_name', 'email', 'CI')}),

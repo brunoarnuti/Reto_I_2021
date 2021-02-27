@@ -1,9 +1,9 @@
 from django.db import models
 from .logicaldelete import LogicalDeletedModel
 
-# Create your models here.
 
 class FastQ(LogicalDeletedModel):
+
     sample = models.ForeignKey('Sample', on_delete=models.DO_NOTHING)
     date_created = models.DateTimeField('date created', auto_now_add=True, editable=True)
     name = models.CharField(max_length=240)
@@ -12,7 +12,7 @@ class FastQ(LogicalDeletedModel):
         return self.name
 
 
-class FastQFile(models.Model):
+class FastQFile(LogicalDeletedModel):
     fastQ = models.ForeignKey(FastQ, on_delete=models.DO_NOTHING)
     file = models.FileField()
 
