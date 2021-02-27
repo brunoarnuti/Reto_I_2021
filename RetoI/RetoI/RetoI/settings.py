@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -148,9 +149,9 @@ LOGGING = {
             "filename": "debug.log",
         },
         "graypy": {
-            "level": "INFO",
+            "level": "DEBUG",
             "class": "graypy.GELFUDPHandler",
-            "host": "graylog", # this is the hostname of the container named graylog from docker-compose
+            "host": os.environ.get("HOST_LOGS"), # this is the hostname of the container named graylog from docker-compose
             "port": 12201, # UDP port we are using in Graylog
         },
     },
@@ -165,7 +166,7 @@ LOGGING = {
     "loggers": {
         "django.request": {
             "handlers": ["graypy"],
-            "level": "INFO",
+            "level": "DEBUG",
             "propagate": True,
         },
     },
