@@ -26,6 +26,5 @@ class DynamicAttributeAdmin(admin.ModelAdmin):
     ]
 
 
-admin.site.register(DynamicAttributeInstance, DynamicAttributeAdmin)
 admin.site.register(DynamicAttributeDefinition, DynamicAttributeDefinitionAdmin)
 
