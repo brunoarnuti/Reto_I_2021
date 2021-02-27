@@ -1,30 +1,25 @@
 from django.contrib import admin
-
-from bioinformatica.models import DynamicAttributeInstance
 from bioinformatica.models.experiment import Experiment
-
-# Register your models here.
-
-
-class AttributeInline(admin.TabularInline):
-    model = DynamicAttributeInstance
-    extra = 1
-    fields = ['attribute_type', 'attribute_value',]
+from bioinformatica.admin.sampleAdmin import SampleInline
+from bioinformatica.models.logicaldelete import LogicalDeletedModelAdmin, LogicaLDeletedModelTabularInLine
+from bioinformatica.admin.dinamicattributeAdmin import DynamicAttributeInstanceInline
 
 
-class ExperimentAdmin(admin.ModelAdmin):
+class ExperimentInline(LogicaLDeletedModelTabularInLine):
+    model = Experiment
+    extra = 0
+
+
+class ExperimentAdmin(LogicalDeletedModelAdmin):
     fieldsets = [
-        (None, {'fields': ['name']}),
-        ('Date information', {'fields': ['date']}),
-        ('Project id', {'fields': ['project_id']})
+        (None, {'fields': [('name','date'),('place','state')]}),
+        ('Project', {'fields': ['project_id']})
     ]
-    list_display = ('name','date','place','state','project_id',)
+    list_display = ('name','date','place','project_id','state')
     list_filter = ['date']
-    search_fields = ['name']
-    inlines = [AttributeInline]
+    search_fields = ['name','project_id']
+    inlines = [DynamicAttributeInstanceInline,SampleInline]
 
-class experimentAdmin(admin.ModelAdmin):
-    exclude = ['deleted', ]
 
 admin.site.register(Experiment,ExperimentAdmin)
 
