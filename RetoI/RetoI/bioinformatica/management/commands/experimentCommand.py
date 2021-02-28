@@ -10,4 +10,5 @@ class Command(BaseCommand):
     def handle(self,*args,**options):
         #experiment = Experiment(name=options['name'],location=options['location'])
         #experiment.save()
+        #comentario
         self.stdout.write(self.style.SUCCESS('Added experiment'))
