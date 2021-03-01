@@ -4,10 +4,6 @@ from bioinformatica.models.logicaldelete import LogicalDeletedModelAdmin, Logica
 from bioinformatica.models.experiment import Experiment
 
 
-class AttributeInlineExperiment(LogicaLDeletedModelTabularInLine):
-    model = Experiment
-    extra = 0
-    classes = ['collapse']
 
 
 class AttributeInlineProject(LogicaLDeletedModelTabularInLine):
