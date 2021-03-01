@@ -6,6 +6,7 @@ from bioinformatica.models.logicaldelete import LogicalDeletedModelAdmin
 from django.urls import path,re_path
 from django.utils.html import format_html
 from django.urls import reverse
+from django.core.management import call_command
 
 
 class ExperimentAdmin(LogicalDeletedModelAdmin):
@@ -30,11 +31,10 @@ class ExperimentAdmin(LogicalDeletedModelAdmin):
     def experiment_actions(self, obj):
         return format_html(
             '<a class="button" href="{}">Run</a>&nbsp;',
-            reverse('admin:experiment-run', args=[obj.id]),
+            reverse('admin:experiment-run', args=[obj.pk]),
         )
 
     def experiment_run(self, request, experiment_id, *args):
-        from django.core.management import call_command
         call_command("experimentCommand", experiment_id)
 
     actions = ['experiment_actions']
