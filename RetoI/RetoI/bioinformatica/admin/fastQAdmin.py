@@ -1,6 +1,5 @@
 from django.contrib import admin
 from bioinformatica.models.fastQ import FastQ, FastQFile
-from bioinformatica.models.logicaldelete import LogicalDeletedModelAdmin
 
 from bioinformatica.models.logicaldelete import LogicalDeletedModelAdmin
 
