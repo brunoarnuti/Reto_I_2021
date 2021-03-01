@@ -2,11 +2,10 @@ from django.contrib import admin
 from bioinformatica.models.project import Project
 from bioinformatica.models.logicaldelete import LogicalDeletedModelAdmin, LogicaLDeletedModelTabularInLine
 from bioinformatica.models.experiment import Experiment
+from bioinformatica.admin.experimentAdmin import ExperimentInline
 
 
-
-
-class AttributeInlineProject(LogicaLDeletedModelTabularInLine):
+class ProjectInline(LogicaLDeletedModelTabularInLine):
     model = Project
     extra = 0
     classes = ['collapse']
@@ -20,7 +19,7 @@ class ProjectAdmin(LogicalDeletedModelAdmin):
 
     search_fields = ['name', 'contact__name', 'contact__surname']
 
-    inlines = [AttributeInlineExperiment, AttributeInlineProject]
+    inlines = [ExperimentInline, ProjectInline]
 
 
     fieldsets = [
