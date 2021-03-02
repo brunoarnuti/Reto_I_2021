@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 class Experiment(LogicalDeletedModel):
-
+    executionCommands = models.TextField(blank=True)
     name = models.CharField(max_length=120)
     place = models.CharField(max_length=200)
     date = models.DateTimeField(_('Date'), default=timezone.now)
