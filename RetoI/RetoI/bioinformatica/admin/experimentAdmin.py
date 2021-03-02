@@ -2,8 +2,8 @@ from django.contrib import admin
 from bioinformatica.models.experiment import Experiment
 from bioinformatica.admin.dinamicattributeAdmin import AttributeInline
 from bioinformatica.admin.sampleAdmin import SamplesInline
-from bioinformatica.models.logicaldelete import LogicalDeletedModelAdmin
-from django.urls import path,re_path
+from bioinformatica.models.logicaldelete import LogicalDeletedModelAdmin, LogicaLDeletedModelTabularInLine
+from django.urls import path, reverse
 from django.utils.html import format_html
 from django.urls import reverse
 from django.core.management import call_command
@@ -34,4 +34,9 @@ class ExperimentAdmin(LogicalDeletedModelAdmin):
 
 
 admin.site.register(Experiment, ExperimentAdmin)
+
+class ExperimentInline(LogicaLDeletedModelTabularInLine):
+    model = Experiment
+    extra = 0
+    classes = ['collapse']
 
