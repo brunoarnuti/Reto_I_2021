@@ -5,10 +5,6 @@ from bioinformatica.admin.sampleAdmin import SamplesInline
 from bioinformatica.models.logicaldelete import LogicalDeletedModelAdmin, LogicaLDeletedModelTabularInLine
 from django.urls import path, reverse
 from django.utils.html import format_html
-<<<<<<< HEAD
-from django.urls import reverse
-=======
->>>>>>> d5a7bc0e7eefcbe4731b8bfde5b71fbb6facf2a4
 from django.core.management import call_command
 
 
