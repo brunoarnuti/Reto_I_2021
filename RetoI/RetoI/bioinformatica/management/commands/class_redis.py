@@ -1,4 +1,6 @@
 from redis import Redis
+from django.core.cache import cache
+
 conn = Redis()
 
 import redis_lock, socket
@@ -14,3 +16,15 @@ else:
         print("I already acquired this in another process.")
     else:
         print("The lock is held on another machine.")
+
+
+# def function():
+#     val = cache.get(key)
+#     if not val:
+#         with cache.lock(key):
+#             val = cache.get(key)
+#             if not val:
+#                 # DO EXPENSIVE WORK
+#                 val = ...
+#                 cache.set(key, value)
+#     return val
