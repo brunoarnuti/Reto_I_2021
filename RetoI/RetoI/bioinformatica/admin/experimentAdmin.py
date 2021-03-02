@@ -12,30 +12,16 @@ from django.core.management import call_command
 class ExperimentAdmin(LogicalDeletedModelAdmin):
 
     fieldsets = [
-        (None, {'fields': ['name']}),
+        (None, {'fields': ['name','executionCommands']}),
         ('Project id', {'fields': ['project_id']})
     ]
 
-    def get_urls(self):
-        urls = super().get_urls()
-        custom_urls = [
-            path(
-                '<int:experiment_id>/run/',
-                self.admin_site.admin_view(self.experiment_run),
-                name='experiment-run',
-            ),
+    def experiment_actions(self, obj,queryset=[]):
+        for q in queryset:
+            print(q.id)
+            call_command("experimentCommand", q.executionCommands,q.name,experiment_id = q.id)
 
-        ]
-        return custom_urls + urls
 
-    def experiment_actions(self, obj):
-        return format_html(
-            '<a class="button" href="{}">Run</a>&nbsp;',
-            reverse('admin:experiment-run', args=[obj.pk]),
-        )
-
-    def experiment_run(self, request, experiment_id, *args):
-        call_command("experimentCommand", experiment_id)
 
     actions = ['experiment_actions']
     experiment_actions.short_description = 'RUN'
