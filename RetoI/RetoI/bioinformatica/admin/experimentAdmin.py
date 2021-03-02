@@ -3,9 +3,8 @@ from bioinformatica.models.experiment import Experiment
 from bioinformatica.admin.dinamicattributeAdmin import AttributeInline
 from bioinformatica.admin.sampleAdmin import SamplesInline
 from bioinformatica.models.logicaldelete import LogicalDeletedModelAdmin, LogicaLDeletedModelTabularInLine
-from django.urls import path,re_path
+from django.urls import path, reverse
 from django.utils.html import format_html
-from django.urls import reverse
 
 
 class ExperimentAdmin(LogicalDeletedModelAdmin):
