@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -146,8 +147,8 @@ LOGGING = {
         "graypy": {
             "level": "DEBUG",
             "class": "graypy.GELFUDPHandler",
-            "host": os.environ.get("HOST_LOGS"), # this is the hostname of the container named graylog from docker-compose
-            "port": 12201, # UDP port we are using in Graylog
+            "host": os.environ.get("HOST_LOGS"),  # this is the hostname of the container named graylog from docker-compose
+            "port": 12201,  # UDP port we are using in Graylog
         },
     },
     "root": {
@@ -173,3 +174,6 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://67.205.171.138:6379/0")
+CELERY_RESULT_BACKEND = os.environ.get("CELERY_BROKER", "redis://67.205.171.138:6379/0")
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
