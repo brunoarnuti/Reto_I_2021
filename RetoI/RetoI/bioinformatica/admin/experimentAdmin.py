@@ -7,6 +7,7 @@ from django.core.management import call_command
 import redis_lock
 import time
 from django.contrib import messages
+from bioinformatica.tasks import printer
 
 
 class ExperimentAdmin(LogicalDeletedModelAdmin):
@@ -15,14 +16,16 @@ class ExperimentAdmin(LogicalDeletedModelAdmin):
         ('Project id', {'fields': ['project_id']})
     ]
 
+    #def check_experiment_completed(self):
+
     def experiment_actions(self, obj, queryset=[]):
         for q in queryset:
             conn = redis_lock.StrictRedis(host='67.205.171.138', port=6379)
             lock = redis_lock.Lock(conn, "exprimento" + str(q.pk))
             if lock.acquire(timeout=1):
-                print(f"Tomando experimento nro: {q.pk}")
+                printer(q)
+                # aca se ejecutan los comandos
                 time.sleep(20)
-                call_command("experimentCommand", q.executionCommands, q.name, experiment_id=q.id)
                 lock.release()
             else:
                 messages.add_message(obj, messages.INFO, 'Alguien ya está trabajando con este experimento')
