@@ -6,19 +6,27 @@ from bioinformatica.models.logicaldelete import LogicalDeletedModelAdmin, Logica
 from django.urls import path, reverse
 from django.utils.html import format_html
 from django.core.management import call_command
-
-
+import redis_lock
+import time
+from django.contrib import messages
 class ExperimentAdmin(LogicalDeletedModelAdmin):
-
     fieldsets = [
         (None, {'fields': ['name','executionCommands']}),
         ('Project id', {'fields': ['project_id']})
     ]
 
-    def experiment_actions(self, obj,queryset=[]):
+    def experiment_actions(self,obj,queryset=[]):
         for q in queryset:
-            print(q.id)
-            call_command("experimentCommand", q.executionCommands,q.name,experiment_id = q.id)
+            conn = redis_lock.StrictRedis(host='67.205.171.138', port=6379)
+            lock = redis_lock.Lock(conn, "exprimento" + str(q.pk))
+            if lock.acquire(timeout=1):
+                print(f"Tomando experimento nro: {q.pk}")
+                time.sleep(20)
+                call_command("experimentCommand", q.executionCommands, q.name, experiment_id=q.id)
+                lock.release()
+            else:
+                messages.add_message(obj,messages.INFO, 'Alguien ya está trabajando con este experimento')
+
 
 
 
