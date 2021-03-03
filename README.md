@@ -4,7 +4,7 @@
 
 
 
-## Para levantar la pagina:
+## Para levantar la pagina
 
 #### Agregar un archivo ".env" a la altura de manage.py, y poner adentro HOST_LOGS=<IP del servidor de greylog\>
   
