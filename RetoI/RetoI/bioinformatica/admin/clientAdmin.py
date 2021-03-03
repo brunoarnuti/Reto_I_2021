@@ -9,6 +9,7 @@ class ClientInline(LogicaLDeletedModelTabularInLine):
     extra = 0
     classes = ['collapse']
 
+
 class clientAdmin(LogicalDeletedModelAdmin):
     search_fields = ['name', 'surname']
     inlines = [ClientInline,ProjectInline]
@@ -16,5 +17,6 @@ class clientAdmin(LogicalDeletedModelAdmin):
         (None, {'fields': [('name','surname')]}),
         ('Other information', {'fields': [('direction','company'),('phone','email')],'classes':['collapse']}),
     ]
+
 
 admin.site.register(Client, clientAdmin)

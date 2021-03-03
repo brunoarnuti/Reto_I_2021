@@ -1,14 +1,15 @@
 from django.core.management.base import BaseCommand, CommandError
-from bioinformatica.models import Experiment as Experiment
+
 
 class Command(BaseCommand):
-    help ='The help information for this command'
+
+    help = 'The help information for this command'
 
     def add_arguments(self, parser):
-        parser.add_argument('first',type=int,help ='A number less than 100')
-        parser.add_argument('second',nargs=3,type=str,help='Three strings')
-        parser.add_argument('--option1',default='default',help='The option1 value')
-        parser.add_argument('--option2',action='store_true',help='True if passed')
+        parser.add_argument('first', type=int, help ='A number less than 100')
+        parser.add_argument('second', nargs=3, type=str, help='Three strings')
+        parser.add_argument('--option1', default='default', help='The option1 value')
+        parser.add_argument('--option2', action='store_true', help='True if passed')
 
     #    parser.add_argument('experiment_ids', nargs='+', type=int)
 
