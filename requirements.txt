@@ -2,3 +2,6 @@ Django==3.1.7
 psycopg2==2.8.6
 dotenv==0.15.0
 graypy==2.1.0
+python-redis-lock==3.7.0
+
+
