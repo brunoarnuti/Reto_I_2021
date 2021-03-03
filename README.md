@@ -4,9 +4,9 @@
 
 
 
-### Para levantar la pagina:
+## Para levantar la pagina:
 
-#### Agregar un archivo ".env" a la altura de manage.py, y poner adentro HOST_LOGS=<IP del servidor de greylog>
+#### Agregar un archivo ".env" a la altura de manage.py, y poner adentro HOST_LOGS=<IP del servidor de greylog\>
   
 #### Correr pip -r requirements.txt
 
@@ -17,7 +17,7 @@
 ####  py manage.py runserver
 
 
-### Para usar celery
+## Para usar celery
 #### celery -A RetoI worker --loglevel=INFO (Activa el worker, que recibe y ejecuta la cola)
 #### celery -A RetoI beat --loglevel=INFO (Activa un "sender" periodico)
 
