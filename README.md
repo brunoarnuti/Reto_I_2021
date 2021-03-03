@@ -6,17 +6,18 @@
 
 ### Para levantar la pagina:
 
-### Agregar un archivo ".env" a la altura de manage.py, y poner adentro HOST_LOGS=<IP del servidor de greylog>
-### Correr pip -r requirements.txt
+#### Agregar un archivo ".env" a la altura de manage.py, y poner adentro HOST_LOGS=<IP del servidor de greylog>
+  
+#### Correr pip -r requirements.txt
 
 ### Correr a la altura de manage.py en ese orden
-###  py manage.py makemigrations
-###  py manage.py migrate
-###  py manage.py createsuperuser
-###  py manage.py runserver
+####  py manage.py makemigrations
+####  py manage.py migrate
+####  py manage.py createsuperuser
+####  py manage.py runserver
 
 
 ### Para usar celery
-### celery -A RetoI worker --loglevel=INFO (Activa el worker, que recibe y ejecuta la cola)
-### celery -A RetoI beat --loglevel=INFO (Activa un "sender" periodico)
+#### celery -A RetoI worker --loglevel=INFO (Activa el worker, que recibe y ejecuta la cola)
+#### celery -A RetoI beat --loglevel=INFO (Activa un "sender" periodico)
 
