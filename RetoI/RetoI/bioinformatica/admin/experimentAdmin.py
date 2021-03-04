@@ -7,6 +7,8 @@ from django.core.management import call_command
 import redis_lock
 import time
 from django.contrib import messages
+from bioinformatica.admin.fastQAdmin import FastQInline
+from bioinformatica.admin.fast5Admin import Fast5Inline
 
 
 class ExperimentAdmin(LogicalDeletedModelAdmin):
@@ -31,7 +33,7 @@ class ExperimentAdmin(LogicalDeletedModelAdmin):
     experiment_actions.short_description = 'RUN'
     experiment_actions.allow_tags = True
     list_display = ('name', 'location', 'state', 'project_id', 'experiment_actions')
-    inlines = [SamplesInline, AttributeInline]
+    inlines = [SamplesInline, AttributeInline, FastQInline, Fast5Inline]
     list_filter = ['date']
     search_fields = ['name']
 
