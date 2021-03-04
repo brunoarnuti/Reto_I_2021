@@ -11,3 +11,6 @@
 ### 3) py manage.py migrate
 ### 4) py manage.py createsuperuser
 ### 5) py manage.py runserver
+
+
+###Correr los tests: python3 manage.py test bioinformatica.tests
