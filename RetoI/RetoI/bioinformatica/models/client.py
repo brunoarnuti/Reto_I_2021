@@ -2,20 +2,25 @@ from django.db import models
 from django.utils.translation import gettext as _
 from .logicaldelete import LogicalDeletedModel
 
-from .project import Project
-
 
 class Client(LogicalDeletedModel):
-
-    name = models.CharField(_('Name'), max_length=200)
-    surname = models.CharField(_('Surname'), max_length=200)
-    company = models.CharField(_('Company'), max_length=200, blank=True)
-    direction = models.CharField(_('Direction'), max_length=200)
+    client_id = models.AutoField(primary_key=True)
+    name = models.CharField(_('Client name'), max_length=200)
+    address = models.CharField(_('Address'), max_length=200)
     email = models.CharField('E-mail', max_length=200, blank=True)
     phone = models.CharField(_('Phone'), max_length=200)
-    project_ids = models.ManyToManyField(Project, blank=True)
-    contact_ids = models.ForeignKey('self', on_delete=models.DO_NOTHING, null=True, blank=True)
 
     def __str__(self):
         return self.name
 
+
+class Contact(LogicalDeletedModel):
+    contact_id = models.AutoField(primary_key=True)
+    client = models.ForeignKey('Client', on_delete=models.CASCADE, null=False, blank=False)
+    name = models.CharField(_('Name'), max_length=200)
+    last_name = models.CharField(_('Last name'), max_length=200)
+    email = models.CharField('E-mail', max_length=200, blank=True)
+    phone = models.CharField(_('Phone'), max_length=200)
+
+    def __str__(self):
+        return '%s (%s)' %(self.name, self.client)

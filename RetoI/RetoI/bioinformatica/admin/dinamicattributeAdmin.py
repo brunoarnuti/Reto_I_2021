@@ -11,19 +11,11 @@ class AttributeInline(LogicaLDeletedModelTabularInLine):
 
 
 class DynamicAttributeDefinitionAdmin(LogicalDeletedModelAdmin):
-
-    fieldsets = [
-        ('Name',                    {'fields': ['attribute_name']}),
-        ('Description',             {'fields': ['attribute_description']}),
-    ]
-
     list_display = ('attribute_name', 'attribute_description')
-
     search_fields = ['attribute_name']
 
 
-class DynamicAttributeAdmin(LogicalDeletedModelAdmin):
-
+class DynamicAttributeInstanceAdmin(LogicalDeletedModelAdmin):
     fieldsets = [
         (None, {'fields': ['attribute_type']}),
         ('Value', {'fields': ['attribute_value']}),
@@ -31,4 +23,4 @@ class DynamicAttributeAdmin(LogicalDeletedModelAdmin):
 
 
 admin.site.register(DynamicAttributeDefinition, DynamicAttributeDefinitionAdmin)
-
+admin.site.register(DynamicAttributeInstance, DynamicAttributeInstanceAdmin)

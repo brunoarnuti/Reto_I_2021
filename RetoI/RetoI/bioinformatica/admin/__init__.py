@@ -1,4 +1,1 @@
-
-from . import experimentAdmin
-from . import projectAdmin, clientAdmin, sampleAdmin, fastQAdmin
-from . import dinamicattributeAdmin
+from . import projectAdmin, ClientAdmin, sampleAdmin, fastQAdmin, fast5Admin, dinamicattributeAdmin, experimentAdmin
