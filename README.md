@@ -13,4 +13,4 @@
 ### 5) py manage.py runserver
 
 
-###Correr los tests: python3 manage.py test bioinformatica.tests
+### Correr los tests: python3 manage.py test bioinformatica.tests
