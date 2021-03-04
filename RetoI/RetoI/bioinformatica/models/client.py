@@ -23,4 +23,4 @@ class Contact(LogicalDeletedModel):
     phone = models.CharField(_('Phone'), max_length=200)
 
     def __str__(self):
-        return '%s (%s)' %(self.name, self.client)
+        return '%s (%s)' % (self.name, self.client)

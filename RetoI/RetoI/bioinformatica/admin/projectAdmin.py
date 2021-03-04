@@ -4,20 +4,14 @@ from bioinformatica.models.logicaldelete import LogicalDeletedModelAdmin, Logica
 from bioinformatica.admin.experimentAdmin import ExperimentInline
 
 
-class ProjectInline(LogicaLDeletedModelTabularInLine):
-    model = Project
-    extra = 0
-    classes = ['collapse']
-
-
 class ProjectAdmin(LogicalDeletedModelAdmin):
     list_display = ('name', 'contact', 'create_date')
     list_filter = ['create_date']
     search_fields = ['name', 'contact__name', 'contact__lastname']
-    inlines = [ExperimentInline, ProjectInline]
+    inlines = [ExperimentInline]
     fieldsets = [
         (None, {'fields': [('name', 'contact')]}),
-        ('Project information', {'fields': ['create_date', 'description', 'projects'], 'classes':['collapse']}),
+        ('Project information', {'fields': ['create_date', 'description'], 'classes':['collapse']}),
     ]
 
 
