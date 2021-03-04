@@ -12,6 +12,7 @@ class FastQ(LogicalDeletedModel):
     name = models.CharField(_('Name'), max_length=240)
     sample = models.ForeignKey('Sample', on_delete=models.CASCADE)
     date_created = models.DateTimeField(_('Date Created'), auto_now_add=True, editable=True)
+    experiment = models.ForeignKey(_('Experiment'), on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name

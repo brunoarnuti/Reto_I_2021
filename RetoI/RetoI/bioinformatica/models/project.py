@@ -11,6 +11,7 @@ class Project(LogicalDeletedModel):
     create_date = models.DateTimeField(_('Create date'), default=datetime.now())
     projects = models.ForeignKey('self', on_delete=models.DO_NOTHING, null=True, blank=True)
     contact = models.ForeignKey('Contact', on_delete=models.DO_NOTHING, null=False, blank=False)
+    #client = models.ForeignKey('Client', on_delete=models.DO_NOTHING, null=True, blank=False)
 
     def __str__(self):
         return self.name

@@ -16,6 +16,7 @@ class Fast5(LogicalDeletedModel):
     date_created = models.DateTimeField(_('Date Created'), auto_now_add=True, editable=True)
     file = models.FileField(upload_to=get_upload_path, verbose_name="Load fast5 File",
                             help_text='Seleccione El archivo Fast5', blank=True, null=True)
+    experiment = models.ForeignKey(_('Experiment'), on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name
