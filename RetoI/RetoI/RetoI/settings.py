@@ -34,6 +34,7 @@ AUTH_USER_MODEL = 'CustomUsers.CustomUser'
 INSTALLED_APPS = [
     'bioinformatica.apps.BioinformaticaConfig',
     'CustomUsers.apps.CustomusersConfig',
+    'admin_confirm',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
