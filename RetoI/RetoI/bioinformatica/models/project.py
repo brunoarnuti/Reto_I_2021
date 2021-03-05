@@ -8,10 +8,8 @@ class Project(LogicalDeletedModel):
     project_id = models.AutoField(primary_key=True)
     name = models.CharField(_('Name'), max_length=200)
     description = models.TextField(_('Description'), blank=True)
-    create_date = models.DateTimeField(_('Create date'), default=datetime.now())
-    projects = models.ForeignKey('self', on_delete=models.DO_NOTHING, null=True, blank=True)
+    create_date = models.DateTimeField(_('Create date'), default=datetime.now(), editable=True)
     contact = models.ForeignKey('Contact', on_delete=models.DO_NOTHING, null=False, blank=False)
-    #client = models.ForeignKey('Client', on_delete=models.DO_NOTHING, null=True, blank=False)
 
     def __str__(self):
         return self.name

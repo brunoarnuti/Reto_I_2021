@@ -1,4 +1,4 @@
-from admin_confirm.admin import confirm_action, AdminConfirmMixin
+from admin_confirm.admin import AdminConfirmMixin
 from django.contrib import admin
 from bioinformatica.models.experiment import Experiment
 from bioinformatica.admin.dinamicattributeAdmin import AttributeInline
@@ -8,8 +8,6 @@ from django.core.management import call_command
 import redis_lock
 import time
 from django.contrib import messages
-from bioinformatica.admin.fastQAdmin import FastQInline
-from bioinformatica.admin.fast5Admin import Fast5Inline
 
 
 class ExperimentAdmin(AdminConfirmMixin, LogicalDeletedModelAdmin):
@@ -24,7 +22,6 @@ class ExperimentAdmin(AdminConfirmMixin, LogicalDeletedModelAdmin):
 
     actions = ["experiment_actions"]
 
-    @confirm_action
     def experiment_actions(self, obj, queryset=[]):
         for q in queryset:
             conn = redis_lock.StrictRedis(host='67.205.171.138', port=6379)
@@ -37,8 +34,6 @@ class ExperimentAdmin(AdminConfirmMixin, LogicalDeletedModelAdmin):
             else:
                 messages.add_message(obj, messages.INFO, 'Alguien ya está trabajando con este experimento')
 
-    # confirm_action(experiment_actions)
-    experiment_actions.allowed_permissions = ('change',)
 
     experiment_actions.short_description = 'RUN'
     experiment_actions.allow_tags = True
