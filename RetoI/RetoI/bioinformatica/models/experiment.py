@@ -3,6 +3,7 @@ from django.utils import timezone
 from .logicaldelete import LogicalDeletedModel
 from django.utils.translation import gettext as _
 import logging
+from bioinformatica.models.fastQ import FastQ
 
 logger = logging.getLogger(__name__)
 
