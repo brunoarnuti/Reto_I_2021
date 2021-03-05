@@ -1,6 +1,7 @@
 from django.contrib import admin
 from bioinformatica.models.client import Client, Contact
 from bioinformatica.models.logicaldelete import LogicalDeletedModelAdmin, LogicaLDeletedModelTabularInLine
+from admin_confirm.admin import confirm_action, AdminConfirmMixin
 
 
 class ClientInline(LogicaLDeletedModelTabularInLine):
@@ -15,7 +16,7 @@ class ContactInLine(LogicaLDeletedModelTabularInLine):
     classes = ['collapse']
 
 
-class ClientAdmin(LogicalDeletedModelAdmin):
+class ClientAdmin(AdminConfirmMixin, LogicalDeletedModelAdmin):
     list_display = ['name', 'address', 'phone', ]
     search_fields = ['name']
     inlines = [ContactInLine]
@@ -24,10 +25,18 @@ class ClientAdmin(LogicalDeletedModelAdmin):
         ('Client Data', {'fields': ['address', ('phone', 'email')], 'classes': ['collapse']}),
     ]
 
+    confirm_change = True
+    confirm_add = True
+    confirmation_fields = ['name', 'address', 'phone', 'email']
 
-class ContactAdmin(LogicalDeletedModelAdmin):
+
+class ContactAdmin(AdminConfirmMixin, LogicalDeletedModelAdmin):
     list_display = ('name', 'last_name', 'phone', 'client')
     search_fields = ['name', 'last_name', 'client__name']
+
+    confirm_change = True
+    confirm_add = True
+    confirmation_fields = ['name', 'last_name', 'client', 'phone', 'email']
 
 
 admin.site.register(Client, ClientAdmin)
