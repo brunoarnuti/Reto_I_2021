@@ -16,7 +16,6 @@ class Experiment(LogicalDeletedModel):
     state = models.CharField(max_length=120)
     project_id = models.ForeignKey('Project', on_delete=models.DO_NOTHING, blank=True, null=True)
     executionCommands = models.TextField(blank=True)
-    logger.info("[INFO] Primer log")
 
     def __str__(self):
         return self.name

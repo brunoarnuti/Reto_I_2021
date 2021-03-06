@@ -6,7 +6,12 @@ import os
 
 
 def get_upload_path(instance, filename):
-    return os.path.join("%s/%s" % (UPLOAD_ROOT, filename))
+    fast5_head = instance.fast5.fast5_id
+    sample_head = instance.fast5.sample.sample_id
+    experiment_head = instance.fast5.sample.experiment.experiment_id
+    project_head = instance.fast5.sample.experiment.project_id.project_id
+    return os.path.join("%s/PROJ_%s/EXP_%s/SAMP_%s/FAST5s/F5_%s/%s" %
+                        (UPLOAD_ROOT, project_head, experiment_head, sample_head, fast5_head, filename))
 
 
 class Fast5(LogicalDeletedModel):

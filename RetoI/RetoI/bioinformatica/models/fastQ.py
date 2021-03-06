@@ -27,7 +27,12 @@ class UploadRootStorage(FileSystemStorage):
 
 
 def get_upload_path(instance, filename):
-    return os.path.join("%s/%s" % (UPLOAD_ROOT, filename))
+    fastQ_head = instance.fastQ.fastQ_id
+    sample_head = instance.fastQ.sample.sample_id
+    experiment_head = instance.fastQ.sample.experiment.experiment_id
+    project_head = instance.fastQ.sample.experiment.project_id.project_id
+    return os.path.join("%s/PROJ_%s/EXP_%s/SAMP_%s/FASTQs/FQ_%s/%s" %
+                        (UPLOAD_ROOT, project_head, experiment_head, sample_head, fastQ_head, filename))
 
 
 class FastQFile(LogicalDeletedModel):
