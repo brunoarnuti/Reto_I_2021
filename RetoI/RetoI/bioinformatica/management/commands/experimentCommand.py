@@ -38,7 +38,7 @@ class Command(BaseCommand):
         #samp_id = exp_obj.sample_set.object.all()
         #samp_obj = self.env['bioinformatica_sample'].search([('sample_id','=',samp_id)])
         p = subprocess.Popen('echo %cd%',shell=True, stdout=subprocess.PIPE)
-        out = p.communicate()[0].decode("utf-8").rstrip('\r\n') + '\\media\\UploadedFiles\\'
+        out = p.communicate()[0].decode("utf-8").rstrip('\r\n') + '\\media\\UploadedFiles\\' + 'EXP_'
         out = out.replace('\\','/')
         print(out)
         d = []
@@ -55,7 +55,7 @@ class Command(BaseCommand):
         for direccion in d:
             print('La direccion: ' + direccion)
             for base, dirs, files in os.walk(direccion):
-                comando = 'cat *.txt archivo0.txt'
+                comando = 'cat *.txt > archivo0.txt'
                 base = base.replace('\\','/')
                 print('La base : ' + base)
                 listBase = base.split('/')
