@@ -18,3 +18,11 @@ class Sample(LogicalDeletedModel):
     def get_path_fastQ_file(self):
         return ("%s/PROJ_%s/EXP_%s/SAMP_%s/FASTQs/" %
                 (UPLOAD_ROOT, self.experiment.project_id.project_id, self.experiment.experiment_id, self.sample_id))
+
+    def get_sample_id(self):
+        return self.sample_id
+
+    def get_experiment_id(self):
+        return self.experiment.experiment_id
+
+
