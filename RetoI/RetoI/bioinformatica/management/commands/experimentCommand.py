@@ -18,7 +18,7 @@ class Command(BaseCommand):
         print(options['command'].split('\r\n'))
         list_commands = options['command'].split('\r\n')
         for command in list_commands:
-            if command.startswith('cat'):
+            if command.__contains__('cat'):
                 p = subprocess.Popen('pwd', shell=True, stdout=subprocess.PIPE)
                 out = p.communicate()[0].decode("utf-8").rstrip('\r\n') + '\\media\\UploadedFiles\\PROJ_' + str(
                     options['project_id']) + '\\EXP_' + str(options['experiment_id']) + '\\'
@@ -33,6 +33,9 @@ class Command(BaseCommand):
                         listBase = base.split('/')
                         if listBase[len(listBase) - 1].startswith('FQ') and len(base) != 0:
                             print(base + ' El popen se ejecuta acá')
+                            command = 'cat *.txt > archivo_0.txt'
                             subprocess.Popen(command, shell=True, cwd=base)
+            elif command.__contains__('nextflow'):
+                print()
             else:
                 subprocess.Popen(command, shell=True)
