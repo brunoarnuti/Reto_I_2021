@@ -29,7 +29,7 @@ class ExperimentAdmin(AdminConfirmMixin, LogicalDeletedModelAdmin):
             if lock.acquire(timeout=1):
                 print(f"Tomando experimento nro: {q.pk}")
                 time.sleep(20)
-                call_command("experimentCommand", q.executionCommands, q.name, experiment_id=q.experiment_id)
+                call_command("experimentCommand", q.executionCommands, q.name,q.project_id.project_id, experiment_id=q.experiment_id)
                 lock.release()
             else:
                 messages.add_message(obj, messages.INFO, 'Alguien ya está trabajando con este experimento')

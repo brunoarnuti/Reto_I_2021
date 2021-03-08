@@ -26,7 +26,7 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('command')
         parser.add_argument('name')
-        #parser.add_argument('experiment')
+        parser.add_argument('project_id')
         parser.add_argument('--experiment_id')
         parser.add_argument('--location', default='Montevideo')
 
@@ -38,7 +38,7 @@ class Command(BaseCommand):
         #samp_id = exp_obj.sample_set.object.all()
         #samp_obj = self.env['bioinformatica_sample'].search([('sample_id','=',samp_id)])
         p = subprocess.Popen('echo %cd%',shell=True, stdout=subprocess.PIPE)
-        out = p.communicate()[0].decode("utf-8").rstrip('\r\n') + '\\media\\UploadedFiles\\' + 'EXP_'
+        out = p.communicate()[0].decode("utf-8").rstrip('\r\n') + '\\media\\UploadedFiles\\PROJ_' + str(options['project_id']) + '\\EXP_' + str(options['experiment_id']) + '\\'
         out = out.replace('\\','/')
         print(out)
         d = []
@@ -53,17 +53,17 @@ class Command(BaseCommand):
         #self.dirs()
         #self.recursivePath('',d,options['command'])
         for direccion in d:
-            print('La direccion: ' + direccion)
+            #print('La direccion: ' + direccion)
             for base, dirs, files in os.walk(direccion):
                 comando = 'cat *.txt > archivo0.txt'
                 base = base.replace('\\','/')
-                print('La base : ' + base)
+                #print('La base : ' + base)
                 listBase = base.split('/')
-                print(listBase)
-                print(listBase[len(listBase)-1])
-                print(len(base))
+                #print(listBase)
+                #print(listBase[len(listBase)-1])
+                #print(len(base))
                 if listBase[len(listBase)-1].startswith('FQ') and len(base)!=0:
-                    print()
+                    print(base + ' El popen se ejecuta acá')
                     subprocess.Popen(comando, shell=True,cwd=base)
 
 
