@@ -37,38 +37,44 @@ class Command(BaseCommand):
         #proj_id = exp_obj.project_id.project_id
         #samp_id = exp_obj.sample_set.object.all()
         #samp_obj = self.env['bioinformatica_sample'].search([('sample_id','=',samp_id)])
-        p = subprocess.Popen('echo %cd%',shell=True, stdout=subprocess.PIPE)
-        out = p.communicate()[0].decode("utf-8").rstrip('\r\n') + '\\media\\UploadedFiles\\PROJ_' + str(options['project_id']) + '\\EXP_' + str(options['experiment_id']) + '\\'
-        out = out.replace('\\','/')
-        print(out)
-        d = []
-        for file in os.listdir(out.rstrip('\r\n')):
-            r = os.path.join(out,file)
-            print('R en este caso es: ' + r)
-            d.append(r)
-            print('D en este caso va siendo: ')
-            #print(d)
-            #print(type(d))
-        #print(d + 'Este es el d')
-        #self.dirs()
-        #self.recursivePath('',d,options['command'])
-        for direccion in d:
-            #print('La direccion: ' + direccion)
-            for base, dirs, files in os.walk(direccion):
-                comando = 'cat *.txt > archivo0.txt'
-                base = base.replace('\\','/')
-                #print('La base : ' + base)
-                listBase = base.split('/')
-                #print(listBase)
-                #print(listBase[len(listBase)-1])
-                #print(len(base))
-                if listBase[len(listBase)-1].startswith('FQ') and len(base)!=0:
-                    print(base + ' El popen se ejecuta acá')
-                    subprocess.Popen(comando, shell=True,cwd=base)
+        print(options['command'].split('\r\n'))
+        list_commands = options['command'].split('\r\n')
+        for command in list_commands:
+            if command.startswith('for'):
+                p = subprocess.Popen('echo %cd%', shell=True, stdout=subprocess.PIPE)
+                out = p.communicate()[0].decode("utf-8").rstrip('\r\n') + '\\media\\UploadedFiles\\PROJ_' + str(
+                    options['project_id']) + '\\EXP_' + str(options['experiment_id']) + '\\'
+                out = out.replace('\\', '/')
+                # print(out)
+                d = []
+                for file in os.listdir(out.rstrip('\r\n')):
+                    r = os.path.join(out, file)
+                    # print('R en este caso es: ' + r)
+                    d.append(r)
+                    # print('D en este caso va siendo: ')
+                    # print(d)
+                    # print(type(d))
+                # print(d + 'Este es el d')
+                # self.dirs()
+                # self.recursivePath('',d,options['command'])
+                for direccion in d:
+                    # print('La direccion: ' + direccion)
+                    for base, dirs, files in os.walk(direccion):
+                        base = base.replace('\\', '/')
+                        # print('La base : ' + base)
+                        listBase = base.split('/')
+                        #print(listBase)
+                        #print(listBase[len(listBase)-1])
+                        #print(len(base))
+                        if listBase[len(listBase) - 1].startswith('FQ') and len(base) != 0:
+                            print(base + ' El popen se ejecuta acá')
+                            subprocess.Popen(command, shell=True, cwd=base)
+            else:
+                subprocess.Popen(command,shell=True)
 
-
-
-
+                # print(listBase)
+                # print(listBase[len(listBase)-1])
+                # print(len(base))
         ##subprocess.Popen(options['command'], shell=True,
         #                cwd='/Users/juanizquierdo/Documents/RETO/Reto_I_2021/RetoI/RetoI/media/UploadedFiles/PROJ_1/EXP_1/SAMP_1/FASTQs/FQ_1/')
 
