@@ -32,7 +32,6 @@ class Command(BaseCommand):
                     for file in files:
                         if file.__contains__('archivo_0.txt'):
                             path_list.append(base + '/' + file)
-
         return path_list
 
     def handle(self, *args, **options):
@@ -54,9 +53,10 @@ class Command(BaseCommand):
                 db_16s = os.environ.get("DB_16S")
                 db_18s = os.environ.get("DB_18S")
                 db_tax = os.environ.get("DB_TAX")
-                list_path = self.get_absolute_path(exp_id, project_id, filter_var=True)
+
+                list_path = self.get_absolute_path(exp_id,project_id,filter_var=True)
+
                 for path in list_path:
-                    print("nextflow run %s -profile docker --reads %s  --db %s --tax %s" % (
-                    main_nf, path, db_16s, db_tax))
-            # else:
-            #    subprocess.Popen(command, shell=True)
+                    path_sample = path.split('/FASTQs/')[0]
+                    print("nextflow run %s -profile docker --reads %s  --db %s --tax %s mv results %s"
+                          %(main_nf,path,db_16s,db_tax,path_sample))
