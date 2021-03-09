@@ -49,7 +49,7 @@ class Command(BaseCommand):
                 path_list = self.get_absolute_path(exp_id,project_id)
                 for base in path_list:
                     #command = 'for %a in (*.txt) do type “%a” >> archivo_0.txt'
-                    command = 'cat *.txt >> archivo_0.txt'
+                    command = 'awk 1 *.txt > archivo_0.txt'
                     if base.__contains__('FQ_'):
                         subprocess.Popen(command, shell=True, cwd=base)
             if command.__contains__('nextflow'):
