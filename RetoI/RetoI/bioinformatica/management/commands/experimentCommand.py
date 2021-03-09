@@ -12,10 +12,10 @@ class Command(BaseCommand):
         parser.add_argument('--experiment_id')
         parser.add_argument('--location', default='Montevideo')
 
-    def get_absolute_path(self,experiment_id,project_id,filter_var=False):
+    def get_absolute_path(self, experiment_id, project_id, filter_var=False):
         path_list = []
         p = subprocess.Popen('pwd', shell=True, stdout=subprocess.PIPE)
-        #p = subprocess.Popen('echo %cd%', shell=True, stdout=subprocess.PIPE)
+        # p = subprocess.Popen('echo %cd%', shell=True, stdout=subprocess.PIPE)
         out = p.communicate()[0].decode("utf-8").rstrip('\r\n') + '\\media\\UploadedFiles\\PROJ_' + str(
             project_id) + '\\EXP_' + str(experiment_id) + '\\'
         out = out.replace('\\', '/')
@@ -33,10 +33,7 @@ class Command(BaseCommand):
                         if file.__contains__('archivo_0.txt'):
                             path_list.append(base + '/' + file)
 
-
         return path_list
-
-
 
     def handle(self, *args, **options):
         # if options['command'] == 'agrupar':
@@ -46,9 +43,9 @@ class Command(BaseCommand):
         list_commands = options['command'].split('\r\n')
         for command in list_commands:
             if command.__contains__('cat'):
-                path_list = self.get_absolute_path(exp_id,project_id)
+                path_list = self.get_absolute_path(exp_id, project_id)
                 for base in path_list:
-                    #command = 'for %a in (*.txt) do type “%a” >> archivo_0.txt'
+                    # command = 'for %a in (*.txt) do type “%a” >> archivo_0.txt'
                     command = 'awk 1 *.txt > archivo_0.txt'
                     if base.__contains__('FQ_'):
                         subprocess.Popen(command, shell=True, cwd=base)
@@ -57,8 +54,9 @@ class Command(BaseCommand):
                 db_16s = os.environ.get("DB_16S")
                 db_18s = os.environ.get("DB_18S")
                 db_tax = os.environ.get("DB_TAX")
-                list_path = self.get_absolute_path(exp_id,project_id,filter_var=True)
+                list_path = self.get_absolute_path(exp_id, project_id, filter_var=True)
                 for path in list_path:
-                    print("nextflow run %s -profile docker --reads %s  --db %s --tax %s" %(main_nf,path,db_16s,db_tax))
-            #else:
+                    print("nextflow run %s -profile docker --reads %s  --db %s --tax %s" % (
+                    main_nf, path, db_16s, db_tax))
+            # else:
             #    subprocess.Popen(command, shell=True)
